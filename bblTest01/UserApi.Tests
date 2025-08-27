@@ -1,0 +1,23 @@
+using UserApi.Models;
+using Xunit;
+
+public class UserTests
+{
+    [Fact]
+    public void AddUser_IncreasesUserCount()
+    {
+        var initialCount = UserRepository.GetAll().Count;
+
+        var newUser = new User
+        {
+            Name = "Test",
+            Username = "testuser",
+            Email = "test@example.com"
+        };
+
+        UserRepository.Add(newUser);
+
+        var currentCount = UserRepository.GetAll().Count;
+        Assert.Equal(initialCount + 1, currentCount);
+    }
+}
